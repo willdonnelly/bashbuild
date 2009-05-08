@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# BashBuild v0.0.0 "Not Yet"
+#
+# BashBuild is a minimal build system implemented entirely in the configure script.
+#  Project setup is performed by modifying the variables at the top of the script.
+#  Subprojects are handled by configure scripts in subdirectories, called recursively.
+#
+
+echo "Nothing to see here, move along!"
