@@ -6,6 +6,9 @@
 #  Project setup is performed by modifying the variables at the top of the script.
 #  Subprojects are handled by configure scripts in subdirectories, called recursively.
 #
+# BashBuild is made available under the GPL, BSD, and MIT licenses.
+#  Hopefully one of those will suffice.
+#
 
 PROJECT="bashbuild-test"
 VERSION="0.0.1"
@@ -127,3 +130,5 @@ done
 
 # Move the temporary makefile to the real one
 mv "$TMPFILE" Makefile
+
+# BashBuild Copyright (c) 2009 Will Donnelly <will.donnelly@gmail.com>
