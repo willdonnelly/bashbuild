@@ -10,16 +10,15 @@
 PROJECT="bashbuild-test"
 VERSION="0.0.1"
 SOURCES="foo.c bar.c"
+LIBRARIES="m SDL"
 OUTPUT="executable"
-PREFIX="/usr/local"
 
 SUBPROJECTS="subtest"
 
 LIBDIRS="/home/foo/lib"
 INCDIRS="/home/foo/inc"
 
-LIBRARIES="m"
-
+PREFIX="/usr/local"
 CCFLAGS="-c -Wall -g"
 LDFLAGS=""
 
