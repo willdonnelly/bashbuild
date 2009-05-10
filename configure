@@ -64,7 +64,7 @@ function detectCompiler () {
 
 function detectPaths () {
     # Autodetect source file main directory
-    PROJDIR=`which $0 | sed 's/configure//'`
+    PROJDIR="$(readlink -f $(dirname $0))"
     BUILDDIR=`pwd`
 }
 
@@ -94,7 +94,9 @@ function calcFilename () {
 # --- Recursively run the subproject configure scripts --- #
 function subprojectsConfigure () {
     for dir in $SUBPROJECTS; do
-	mkdir -p "$dir" && cd "$dir" && "$PROJDIR"/"$dir"/configure -p "$PREFIX" -c "C_COMPILER"
+	mkdir -p "$dir"
+	cd "$dir"
+	sh $PROJDIR/$dir/configure -p "$PREFIX" -c "C_COMPILER"
 	cd "$BUILDDIR"
 	if [ ! -f "$BUILDDIR/$dir/Makefile" ]; then echo "Error: Unable to configure $dir">&2; exit; fi;
     done
@@ -195,11 +197,11 @@ then
     ENDSTRING='# --- User Variables End Here --- #'
 
     # Print lines up to (not including) STARTSTRING
-    awk "BEGIN {p = 1}; /$STARTSTRING/ {p = 0}; p > 0 {print \$0}" `which $0`
+    awk "BEGIN {p = 1}; /$STARTSTRING/ {p = 0}; p > 0 {print \$0}" `readlink -f $0`
     # Print lines between STARTSTRING and ENDSTRING, inclusive
     awk "BEGIN {p = 0}; /$STARTSTRING/ {p = 1}; /$ENDSTRING/ {p = 0; print \$0}; p > 0 {print \$0}" "$2"
     # Print lines after (not including) ENDSTRING
-    awk "BEGIN {p = 0}; p > 0 {print \$0}; /$ENDSTRING/ {p = 1};" `which $0`
+    awk "BEGIN {p = 0}; p > 0 {print \$0}; /$ENDSTRING/ {p = 1};" `readlink -f $0`
 else
     main
 fi
