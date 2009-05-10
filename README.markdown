@@ -13,7 +13,7 @@ Autotools, as evidenced by the proliferation of alternative build systems.
 
 But people are still used to Autotools. If you regularly compile programs from
 source on Linux, you probably have make installed, and you are probably well
-used to the familiar `./compile && make && sudo make install` process. Given
+used to the familiar `./configure && make && sudo make install` process. Given
 this widespread familiarity, it seems like a waste to make people learn a whole
 new system just to compile a program.
 
@@ -68,4 +68,4 @@ The `CCFLAGS` and `LDFLAGS` variables specify additional arguments for the
 compiler and linker.
 
 Once these variables have been set, building the project is as simple as
-running `configure && make`. 
+running `./configure && make`. 
