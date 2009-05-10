@@ -18,7 +18,10 @@ function runTest () {
     if [ ! "$(./$1)" == 'Success!' ]; then echo "Failed test '$1'"; exit; fi;
 
     make distclean > /dev/null
+
     rm configure
+    for i in $2; do rm $i/configure; done;
+
     cd ..
 }
 
