@@ -136,7 +136,7 @@ function writeBuildBinary () {
 
 function writeBuildObjects () {
     writeLine  "$BUILDDIR/%.o: $PROJDIR/%.c"
-    writeLine  "	$C_COMPILER \$(CFLAGS) -fPIC \$< -o \$@"
+    writeLine  "	$C_COMPILER -c \$(CFLAGS) -fPIC \$< -o \$@"
 }
 
 function writeBuildSubprojects () {
