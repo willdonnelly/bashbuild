@@ -10,6 +10,8 @@
 #  Hopefully one of those will suffice.
 #
 
+# --- User Variables Start Here --- #
+
 PROJECT="project-name"  # The name of the project being configured.
 VERSION="0.0.0"         # The version of the project.
 SOURCES="srcA.c srcB.c" # The source files to be compiler
