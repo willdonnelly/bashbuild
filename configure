@@ -94,12 +94,7 @@ function subprojectsConfigure () {
     for dir in $SUBPROJECTS; do
 	mkdir -p "$dir" && cd "$dir" && "$PROJDIR"/"$dir"/configure -p "$PREFIX" -c "C_COMPILER"
 	cd "$BUILDDIR"
-	echo "$BUILDDIR/$dir/Makefile"
-	if [ ! -f "$BUILDDIR/$dir/Makefile" ]
-	then
-	    echo "Error: Unable to configure subproject $dir">&2
-	    exit
-	fi
+	if [ ! -f "$BUILDDIR/$dir/Makefile" ]; then echo "Error: Unable to configure $dir">&2; exit; fi;
     done
 }
 
