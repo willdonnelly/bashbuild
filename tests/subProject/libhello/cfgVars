@@ -1,0 +1,15 @@
+# --- User Variables Start Here --- #
+
+PROJECT="hello"
+VERSION="0.0.0"
+SOURCES="srcA.c"
+LIBRARIES=""
+OUTPUT="static"
+SUBPROJECTS=""
+LIBDIRS=""
+INCDIRS=""
+PREFIX="/usr/local"
+CCFLAGS="-Wall -g"
+LDFLAGS=""
+
+# --- User Variables End Here --- #
