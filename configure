@@ -173,7 +173,7 @@ function writeBuildExtra () {
 
     writeLine  "distclean:"
     writeLine  "	@ for i in \$(SUBPROJECTS); do make -C \$\${i} distclean; done"
-    writeLine  "	rm -f \$(OBJECTS_BLD) $BINARY Makefile"
+    writeLine  "	rm -f \$(OBJECTS_BLD) $BINARY Makefile config.h"
 
     writeLine  ".PHONY: install tidy clean distclean \$(SUBPROJECTS)"
 }
@@ -224,5 +224,8 @@ then
 else
     main $@
 fi
+
+# No error
+exit 0;
 
 # BashBuild Copyright (c) 2009 Will Donnelly <will.donnelly@gmail.com>
