@@ -32,7 +32,7 @@ LDFLAGS=""              # Additional linker flags
 function main () {
     detectCompiler
     detectPaths
-    parseArguments
+    parseArguments $@
     calcFilename
 
     subprojectsConfigure
@@ -71,13 +71,14 @@ function detectPaths () {
 
 # --- Parse the command-line arguments to ./configure --- #
 function parseArguments () {
-    while getopts "p:c:" Option
-    do
-	case $Option in
-	    p ) PREFIX="$OPTARG";;
-	    c ) C_COMPILER=`which $OPTARG`;;
-            * ) echo "./configure [-h] [-p install-prefix] [-c c-compiler]" >2;;
-	esac
+    OPTLIST=`getopt -n './configure' -o 'p:c:' -l 'prefix:' -- $@`
+    set -- $OPTLIST
+    while [[ ! "$1" == '--' ]]; do
+        case "$1" in
+            -p | --prefix   ) shift; PREFIX="$1"; shift;;
+            -c | --compiler ) shift; C_COMPILER="$1"; shift;;
+            *               ) echo "./configure [-h,--help] [-p,--prefix=install-prefix] [-c,--compiler=c-compiler]" >&2; exit;;
+        esac
     done
 }
 
@@ -203,7 +204,7 @@ then
     # Print lines after (not including) ENDSTRING
     awk "BEGIN {p = 0}; p > 0 {print \$0}; /$ENDSTRING/ {p = 1};" `readlink -f $0`
 else
-    main
+    main $@
 fi
 
 # BashBuild Copyright (c) 2009 Will Donnelly <will.donnelly@gmail.com>
