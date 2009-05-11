@@ -8,7 +8,7 @@ OUTPUT="executable"
 SUBPROJECTS="libhello"
 LIBDIRS="libhello"
 INCDIRS=""
-PREFIX="/usr/local"
+DEFAULT_PREFIX="/usr/local"
 CCFLAGS="-Wall -g"
 LDFLAGS=""
 

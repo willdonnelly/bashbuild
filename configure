@@ -23,15 +23,14 @@ SUBPROJECTS="subA subB" # The names of subdirectories holding subprojects
 LIBDIRS="/path/to/lib"  # The paths to extra library directories
 INCDIRS="/path/to/inc"  # The paths to extra include directories
 
-PREFIX="/usr/local"     # The default prefix for installations
+DEFAULT_PREFIX="/usr/local"     # The default prefix for installations if nothing else sets it
 CCFLAGS="-Wall -g"      # Additional compiler flags
 LDFLAGS=""              # Additional linker flags
 
 # --- User Variables End Here --- #
 
 function main () {
-    detectCompiler
-    detectPaths
+    detectVariables
     parseArguments $@
     calcFilename
 
@@ -51,23 +50,17 @@ function main () {
 }
 
 # --- Autodetection Functions --- #
-function detectCompiler () {
+function detectVariables () {
     # Autodetect compiler paths
-    C_COMPILER=""
-    if [ -z "$C_COMPILER" ]; then C_COMPILER=`which gcc`; fi;
-    if [ -z "$C_COMPILER" ]; then C_COMPILER=`which cc`; fi;
+    if [ -z "$CC" ]; then CC=`which gcc`; fi;
+    if [ -z "$CC" ]; then CC=`which cc`; fi;
 
-    CPP_COMPILER=""
-    if [ -z "$CPP_COMPILER" ]; then CPP_COMPILER=`which g++`; fi;
-    if [ -z "$CPP_COMPILER" ]; then CPP_COMPILER=`which c++`; fi;
-}
+    if [ -z "$PREFIX" ]; then PREFIX=$DEFAULT_PREFIX; fi;
 
-function detectPaths () {
     # Autodetect source file main directory
     PROJDIR="$(readlink -f $(dirname $0))"
     BUILDDIR=`pwd`
 }
-
 
 # --- Parse the command-line arguments to ./configure --- #
 function parseArguments () {
@@ -75,8 +68,8 @@ function parseArguments () {
     set -- $OPTLIST
     while [[ ! "$1" == '--' ]]; do
         case "$1" in
-            -p | --prefix   ) shift; PREFIX="$1"; shift;;
-            -c | --compiler ) shift; C_COMPILER="$1"; shift;;
+            -p | --prefix   ) shift; PREFIX=$1; shift;;
+            -c | --compiler ) shift; CC=$1; shift;;
             *               ) echo "./configure [-h,--help] [-p,--prefix=install-prefix] [-c,--compiler=c-compiler]" >&2; exit;;
         esac
     done
@@ -97,7 +90,7 @@ function subprojectsConfigure () {
     for dir in $SUBPROJECTS; do
 	mkdir -p "$dir"
 	cd "$dir"
-	sh $PROJDIR/$dir/configure -p "$PREFIX" -c "$C_COMPILER"
+	sh $PROJDIR/$dir/configure -p "$PREFIX" -c "$CC"
 	cd "$BUILDDIR"
 	if [ ! -f "$BUILDDIR/$dir/Makefile" ]; then echo "Error: Unable to configure $dir">&2; exit; fi;
     done
@@ -132,16 +125,16 @@ function writeBuildBinary () {
     writeLine "$BINARY: \$(OBJECTS_BLD) \$(SUBPROJECTS)"
     writeLine "ifdef SOURCES"
     case "$OUTPUT" in
-	shared) writeLine "	$C_COMPILER -shared \$(OBJECTS_BLD) \$(LFLAGS) -o $BINARY";;
+	shared) writeLine "	$CC -shared \$(OBJECTS_BLD) \$(LFLAGS) -o $BINARY";;
 	static) writeLine "	ar rcs $BINARY \$(OBJECTS_BLD)";;
-	*     ) writeLine "	$C_COMPILER \$(OBJECTS_BLD) \$(LFLAGS) -o $BINARY";;
+	*     ) writeLine "	$CC \$(OBJECTS_BLD) \$(LFLAGS) -o $BINARY";;
     esac
     writeLine "endif"
 }
 
 function writeBuildObjects () {
     writeLine  "$BUILDDIR/%.o: $PROJDIR/%.c"
-    writeLine  "	$C_COMPILER -c \$(CFLAGS) -fPIC \$< -o \$@"
+    writeLine  "	$CC -c \$(CFLAGS) -fPIC \$< -o \$@"
 }
 
 function writeBuildSubprojects () {

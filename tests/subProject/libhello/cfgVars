@@ -8,7 +8,7 @@ OUTPUT="static"
 SUBPROJECTS=""
 LIBDIRS=""
 INCDIRS=""
-PREFIX="/usr/local"
+DEFAULT_PREFIX="/usr/local"
 CCFLAGS="-Wall -g"
 LDFLAGS=""
 
