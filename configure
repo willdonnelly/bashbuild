@@ -80,7 +80,7 @@ function parseArguments () {
                 CC=`which $CC`
                 if [ -z "$CC" ]; then
                     echo './configure [-h,--help] [-p,--prefix=install-prefix] [-c,--compiler=c-compiler]' >&2;
-                    exit;
+                    exit 1;
                 fi
                 shift;;
         esac
@@ -104,7 +104,7 @@ function subprojectsConfigure () {
 	cd "$dir"
 	sh $PROJDIR/$dir/configure -p "$PREFIX" -c "$CC"
 	cd "$BUILDDIR"
-	if [ ! -f "$BUILDDIR/$dir/Makefile" ]; then echo "Error: Unable to configure $dir">&2; exit; fi;
+	if [ ! -f "$BUILDDIR/$dir/Makefile" ]; then echo "Error: Unable to configure $dir">&2; exit 1; fi;
     done
 }
 
@@ -210,7 +210,7 @@ function stopOutput () {
 if [ "$1" == 'reconfigure' ]
 then
     # Takes the variables from another script, and implants them into this one's code
-    if [[ -z "$2" || ! -f "$2" ]]; then echo 'Usage: ./configure reconfigure <variable-file>'; exit; fi;
+    if [[ -z "$2" || ! -f "$2" ]]; then echo 'Usage: ./configure reconfigure <variable-file>'; exit 1; fi;
 
     STARTSTRING='# --- User Variables Start Here --- #'
     ENDSTRING='# --- User Variables End Here --- #'
