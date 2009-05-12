@@ -1,4 +1,4 @@
-# --- User Variables Start Here --- #
+# --- User Configuration Starts Here --- #
 
 PROJECT="a"
 VERSION="0.0.0"
@@ -12,4 +12,4 @@ DEFAULT_PREFIX="/usr/local"
 CCFLAGS="-Wall -g"
 LDFLAGS=""
 
-# --- User Variables End Here --- #
+# --- User Configuration Ends Here --- #
