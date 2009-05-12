@@ -1,0 +1,15 @@
+# --- User Variables Start Here --- #
+
+PROJECT="shlib"
+VERSION="0.0.0"
+SOURCES="src.c"
+LIBRARIES="test"
+OUTPUT="executable"
+SUBPROJECTS="libtest"
+LIBDIRS="./libtest"
+INCDIRS=""
+DEFAULT_PREFIX="/usr/local"
+CCFLAGS="-Wall -g"
+LDFLAGS=""
+
+# --- User Variables End Here --- #

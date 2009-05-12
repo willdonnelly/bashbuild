@@ -12,14 +12,14 @@ A list of each test, and what features of BashBuild its success depends on.
     * Multiple subprojects
     * Multiple libraries
     * Static libraries
+  * SharedLibrary
+    * Shared Libraries
 
 Things That Need Testing
 ------------------------
 
 Features that aren't yet covered by any existing test, grouped by an imagined test.
 
-  * SharedLibrary
-    * Shared Libraries
   * Prefixes
     * Defaulting
     * Environment variable

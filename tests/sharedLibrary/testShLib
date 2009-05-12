@@ -1,0 +1,19 @@
+#!/bin/sh
+
+../../configure reconfigure cfgVars > configure
+../../configure reconfigure libtest/cfgVars > libtest/configure
+
+if sh configure; then true; else exit 1; fi;
+
+# Fail if no makefile
+if [ ! -f Makefile ]; then exit 1; fi;
+make
+
+# Fail if no executable
+if [ ! -f shlib ]; then exit 1; fi;
+if LD_LIBRARY_PATH=libtest ./shlib; then true; else exit 1; fi;
+
+make distclean
+rm -f configure libtest/configure
+
+exit 0;

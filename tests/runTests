@@ -8,4 +8,8 @@ cd libraries
 if sh testLibraries > /dev/null; then true; else echo 'Test "libraries" failed.'; exit 1; fi;
 cd ..
 
+cd sharedLibrary
+if sh testShLib > /dev/null; then true; else echo 'Test "shared library" failed.'; exit 1; fi;
+cd ..
+
 echo 'All Tests Successful!'
