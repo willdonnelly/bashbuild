@@ -1,26 +1,36 @@
-Things That Need Test Cases
----------------------------
+Things That Are Tested
+----------------------
 
-A list of every aspect of every feature that BashBuild has that could possibly need testing.
+A list of each test, and what features of BashBuild its success depends on.
 
-  * Multiple Source files
-  * Multiple Libraries
-  * Output types
-    * Executable
-    * Static Library
-    * Shared Library
-  * Multiple Subprojects
-  * Prefix Setting
+  * Basic
+    * Basic makefile generation and building
+    * Multiple source files
+    * Executables
+    * Compiler autodetection
+  * Libraries
+    * Multiple subprojects
+    * Multiple libraries
+    * Static libraries
+
+Things That Need Testing
+------------------------
+
+Features that aren't yet covered by any existing test, grouped by an imagined test.
+
+  * SharedLibrary
+    * Shared Libraries
+  * Prefixes
     * Defaulting
     * Environment variable
     * Command line
       * Short form
       * Long form
-  * Compiler setting
+  * Compilers
     * Autodetection
     * Environment variable
     * Command line
       * Switch
       * Autotools style
-  * Config file
+  * ConfigHeader
     * Version number

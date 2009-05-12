@@ -1,6 +1,6 @@
-void helloB ();
+int bFunction();
 
-int main(int argc, char** argv) {
-  helloB();
-  return 0;
+int main (int argc, char** argv) {
+    if ( bFunction() ) return 0;
+    return 1;
 }

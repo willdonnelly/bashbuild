@@ -1,0 +1,20 @@
+#!/bin/sh
+
+../../configure reconfigure cfgVars > configure
+../../configure reconfigure libA/cfgVars > libA/configure
+../../configure reconfigure libB/cfgVars > libB/configure
+
+if sh configure; then true; else exit 1; fi;
+
+# Fail if no makefile
+if [ ! -f Makefile ]; then exit 1; fi;
+make
+
+# Fail if no executable
+if [ ! -f libraries ]; then exit 1; fi;
+if ./libraries; then true; else exit 1; fi;
+
+make distclean
+rm -f configure libA/configure libB/configure
+
+exit 0;
