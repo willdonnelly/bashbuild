@@ -77,7 +77,6 @@ function parseArguments () {
             --              ) shift;;
             *               )
                 CC=`echo "$1" | sed 's@^CC=@@'`
-                CC=`which $CC`
                 if [ -z "$CC" ]; then
                     echo './configure [-h,--help] [-p,--prefix=install-prefix] [-c,--compiler=c-compiler]' >&2;
                     exit 1;
@@ -85,6 +84,7 @@ function parseArguments () {
                 shift;;
         esac
     done
+    CC=`which $CC`
 }
 
 
