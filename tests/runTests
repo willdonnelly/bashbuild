@@ -12,4 +12,8 @@ cd sharedLibrary
 if sh testShLib > /dev/null; then true; else echo 'Test "shared library" failed.'; exit 1; fi;
 cd ..
 
+cd prefix
+if sh testPrefix > /dev/null; then true; else echo 'Test "prefix" failed.'; exit 1; fi;
+cd ..
+
 echo 'All Tests Successful!'

@@ -1,0 +1,33 @@
+#!/bin/sh
+
+../../configure reconfigure cfgVars > configure
+
+if sh configure; then true; else exit 1; fi;
+if [ ! -f Makefile ]; then exit 1; fi;
+DEFAULTPREFIX=`cat Makefile | grep '/opt/prefix/default'`
+
+if PREFIX=/opt/prefix/environment sh configure; then true; else exit 1; fi;
+if [ ! -f Makefile ]; then exit 1; fi;
+ENVPREFIX=`cat Makefile | grep '/opt/prefix/environment'`
+
+if sh configure -p /opt/prefix/flag/short; then true; else exit 1; fi;
+if [ ! -f Makefile ]; then exit 1; fi;
+SFLAGPREFIX=`cat Makefile | grep '/opt/prefix/flag/short'`
+
+if sh configure --prefix=/opt/prefix/flag/long; then true; else exit 1; fi;
+if [ ! -f Makefile ]; then exit 1; fi;
+LFLAGPREFIX=`cat Makefile | grep '/opt/prefix/flag/long'`
+
+if [[ -z "$DEFAULTPREFIX" ||
+      -z "$ENVPREFIX" ||
+      -z "$SFLAGPREFIX" ||
+      -z "$LFLAGPREFIX" ]]
+then
+    echo "Error in prefix"
+    exit 1
+fi
+
+make distclean
+rm -f configure
+
+exit 0;

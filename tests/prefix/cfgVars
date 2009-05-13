@@ -1,0 +1,15 @@
+# --- User Configuration Starts Here --- #
+
+PROJECT="prefix"
+VERSION="0.0.0"
+SOURCES="src.c"
+LIBRARIES=""
+OUTPUT="executable"
+SUBPROJECTS=""
+LIBDIRS=""
+INCDIRS=""
+DEFAULT_PREFIX="/opt/prefix/default"
+CCFLAGS="-Wall -g"
+LDFLAGS=""
+
+# --- User Configuration Ends Here --- #
