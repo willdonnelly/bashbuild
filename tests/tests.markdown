@@ -20,17 +20,17 @@ A list of each test, and what features of BashBuild its success depends on.
     * Command line
       * Short form
       * Long form
-
-Things That Need Testing
-------------------------
-
-Features that aren't yet covered by any existing test, grouped by an imagined test.
-
   * Compilers
     * Autodetection
     * Environment variable
     * Command line
       * Switch
       * Autotools style
+
+Things That Need Testing
+------------------------
+
+Features that aren't yet covered by any existing test, grouped by an imagined test.
+
   * ConfigHeader
     * Version number

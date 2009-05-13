@@ -1,0 +1,43 @@
+#!/bin/sh
+
+../../configure reconfigure cfgVars > configure
+
+if sh configure; then true; else exit 1; fi;
+if [ ! -f Makefile ]; then exit 1; fi;
+DEFCC=`cat Makefile | grep $(which 'gcc') | head -n 1`
+
+if CC=cc sh configure; then true; else exit 1; fi;
+if [ ! -f Makefile ]; then exit 1; fi;
+ENVCC=`cat Makefile | grep $(which 'cc') | head -n 1`
+
+if sh configure CC=cc; then true; else exit 1; fi;
+if [ ! -f Makefile ]; then exit 1; fi;
+AUTCC=`cat Makefile | grep $(which 'cc') | head -n 1`
+
+if sh configure --compiler=cc; then true; else exit 1; fi;
+if [ ! -f Makefile ]; then exit 1; fi;
+LFGCC=`cat Makefile | grep $(which 'cc') | head -n 1`
+
+if sh configure -c cc; then true; else exit 1; fi;
+if [ ! -f Makefile ]; then exit 1; fi;
+SFGCC=`cat Makefile | grep $(which 'cc') | head -n 1`
+
+echo "$DEFCC"
+echo "$ENVCC"
+echo "$AUTCC"
+echo "$SFGCC"
+echo "$LFGCC"
+
+if [[ -z "$DEFCC" ||
+      -z "$ENVCC" ||
+      -z "$AUTCC" ||
+      -z "$SFGCC" ||
+      -z "$LFGCC" ]]
+then
+    exit 1
+fi
+
+make distclean
+rm -f configure
+
+exit 0;

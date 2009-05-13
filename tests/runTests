@@ -16,4 +16,7 @@ cd prefix
 if sh testPrefix > /dev/null; then true; else echo 'Test "prefix" failed.'; exit 1; fi;
 cd ..
 
+cd compiler
+if sh testCompiler > /dev/null; then true; else echo 'Test "compiler" failed.'; exit 1; fi;
+cd ..
 echo 'All Tests Successful!'

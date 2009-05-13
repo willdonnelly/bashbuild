@@ -1,0 +1,15 @@
+# --- User Configuration Starts Here --- #
+
+PROJECT="compiler"
+VERSION="0.0.0"
+SOURCES="src.c"
+LIBRARIES=""
+OUTPUT="executable"
+SUBPROJECTS=""
+LIBDIRS=""
+INCDIRS=""
+DEFAULT_PREFIX="/usr/local"
+CCFLAGS="-Wall -g"
+LDFLAGS=""
+
+# --- User Configuration Ends Here --- #
