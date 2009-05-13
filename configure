@@ -68,7 +68,7 @@ function detectVariables () {
 
 # --- Parse the command-line arguments to ./configure --- #
 function parseArguments () {
-    OPTLIST=`getopt -u -n './configure' -o 'p:c:' -l 'prefix:' -- $@`
+    OPTLIST=`getopt -u -n './configure' -o 'p:c:' -l 'prefix:,compiler:' -- $@`
     set -- $OPTLIST
     while [[ -n "$1" ]]; do
         case $1 in
