@@ -23,7 +23,6 @@ if [[ -z "$DEFAULTPREFIX" ||
       -z "$SFLAGPREFIX" ||
       -z "$LFLAGPREFIX" ]]
 then
-    echo "Error in prefix"
     exit 1
 fi
 
