@@ -1,5 +1,5 @@
-Things That Are Tested
-----------------------
+Tests
+-----
 
 A list of each test, and what features of BashBuild its success depends on.
 
@@ -26,11 +26,5 @@ A list of each test, and what features of BashBuild its success depends on.
     * Command line
       * Switch
       * Autotools style
-
-Things That Need Testing
-------------------------
-
-Features that aren't yet covered by any existing test, grouped by an imagined test.
-
   * ConfigHeader
     * Version number
