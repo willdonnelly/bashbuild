@@ -116,8 +116,10 @@ function writeVariables () {
     writeLine "LFLAGS=$LDFLAGS \$(foreach i,$LIBDIRS,-L\$(i)) \$(foreach i,$LIBRARIES,-l\$(i))"
     writeLine "CFLAGS=$CCFLAGS \$(foreach i,$INCDIRS,-I\$(i))"
     writeLine "SUBPROJECTS=$SUBPROJECTS"
-    writeLine "SOURCES=\$(foreach i,$SOURCES,$PROJDIR/\$(i))"
-    writeLine "SOURCES_TMP=\$(foreach i,$SOURCES,$BUILDDIR/\$(i))"
+    if [ -n "$SOURCES" ]; then
+        writeLine "SOURCES=\$(foreach i,$SOURCES,$PROJDIR/\$(i))"
+        writeLine "SOURCES_TMP=\$(foreach i,$SOURCES,$BUILDDIR/\$(i))"
+    fi
     writeLine "OBJECTS_BLD=\$(SOURCES_TMP:.c=.o)"
 }
 
