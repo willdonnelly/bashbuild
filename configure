@@ -68,19 +68,17 @@ function detectVariables () {
 
 # --- Parse the command-line arguments to ./configure --- #
 function parseArguments () {
-    OPTLIST=`getopt -u -n './configure' -o 'p:c:' -l 'prefix:,compiler:' -- $@`
+    OPTLIST=`getopt -u -n './configure' -o 'hp:c:' -l 'help,prefix:,compiler:' -- $@`
     set -- $OPTLIST
     while [[ -n "$1" ]]; do
         case $1 in
             -p | --prefix   ) shift; PREFIX=$1; shift;;
             -c | --compiler ) shift; CC=$1; shift;;
+            -h | --help     ) echo './configure [-h,--help] [-p,--prefix=install-prefix] [-c,--compiler=c-compiler]' >&2; shift;;
             --              ) shift;;
             *               )
                 CC=`echo "$1" | sed 's@^CC=@@'`
-                if [ -z "$CC" ]; then
-                    echo './configure [-h,--help] [-p,--prefix=install-prefix] [-c,--compiler=c-compiler]' >&2;
-                    exit 1;
-                fi
+                if [ -z "$CC" ]; then exit 1; fi
                 shift;;
         esac
     done
