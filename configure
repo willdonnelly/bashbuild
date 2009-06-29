@@ -111,8 +111,8 @@ function writeVariables () {
     # Print some important variables
     writeLine "PROJECT=$PROJECT"
     writeLine "VERSION=$VERSION"
-    writeLine "LFLAGS=$LDFLAGS \$(foreach i,$LIBDIRS,-L\$(i)) \$(foreach i,$LIBRARIES,-l\$(i))"
-    writeLine "CFLAGS=$CCFLAGS \$(foreach i,$INCDIRS,-I\$(i))"
+    writeLine "LFLAGS=$LDFLAGS \$(foreach i,$LIBDIRS,-L$BUILDDIR/\$(i)) \$(foreach i,$LIBRARIES,-l\$(i))"
+    writeLine "CFLAGS=$CCFLAGS \$(foreach i,$INCDIRS,-I$PROJDIR/\$(i))"
     writeLine "SUBPROJECTS=$SUBPROJECTS"
     if [ -n "$SOURCES" ]; then
         writeLine "SOURCES=\$(foreach i,$SOURCES,$PROJDIR/\$(i))"
